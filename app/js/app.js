@@ -65,7 +65,7 @@ function limparConteudoElemento(elemento){
 
 function buscarNoticias(tema, callback){
 
-    const url = "http://localhost:4000";
+    const url = "http://ch4pl1n-noticiasapi.herokuapp.com";
 
     buscandoNoticia = true;
 
