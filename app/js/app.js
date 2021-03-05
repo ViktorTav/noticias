@@ -2,13 +2,28 @@ let buscandoNoticia = false;
 let primeiraExecucao = true;
 let botaoAtual;
 
+function mostrarMensagem(texto){
+
+    limparConteudoElemento("#mensagem");
+
+    $("#mensagem").html(`
+    
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            ${texto}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    `)
+
+}
+
 function arrumarLayout(){
 
     const options = {left:"0"};
     const callback = function(){
 
         $(this).css("justify-content", "flex-end");
-        $("div#noticias").removeClass("hide");
+        $("div#noticias").css("display", "flex");
 
     }
 
@@ -17,21 +32,22 @@ function arrumarLayout(){
 
 }
 
-function lidarCliqueBotaoTema(botao){
+function lidarCliqueBotaoTema(botao, callback){
 
     if (primeiraExecucao){
-        arrumarLayout(); primeiraExecucao = false;
+        arrumarLayout(); 
+        primeiraExecucao = false;
     }   
 
     if (!buscandoNoticia){
 
         $("div#noticias").animate({opacity:0},200);
-        buscarNoticias(botao.id, ()=>{
+        callback(botao.id, ()=>{
             $("div#noticias").animate({opacity:1},1000);
             
                 botaoAtual? $(botaoAtual).removeClass("active") : "";
                 botaoAtual = botao; 
-                $(botaoAtual).addClass("active")
+                $(botaoAtual).addClass("active");
 
             });
 
@@ -39,9 +55,9 @@ function lidarCliqueBotaoTema(botao){
 
 }
 
-function limparUlNoticias(){
+function limparConteudoElemento(elemento){
 
-    $("div#noticias>ul").html("");
+    $(elemento).html("");
 
 }
 
@@ -49,7 +65,7 @@ function limparUlNoticias(){
 
 function buscarNoticias(tema, callback){
 
-    const url = "https://ch4pl1n-noticiasapi.herokuapp.com";
+    const url = "http://localhost:4000";
 
     buscandoNoticia = true;
 
@@ -58,7 +74,7 @@ function buscarNoticias(tema, callback){
     .then(res => res.content)
     .then(noticias=> {
 
-        limparUlNoticias()
+        limparConteudoElemento("div#noticias>ul");
 
         noticias.forEach(noticia=>{
 
@@ -75,7 +91,10 @@ function buscarNoticias(tema, callback){
         callback();
 
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        console.log(err);
+        mostrarMensagem("Não foi possível buscar notícias :(")
+    });
     
 }
 
@@ -83,6 +102,6 @@ function buscarNoticias(tema, callback){
 
 $("#temasNoticias").click((event)=>{
 
-    lidarCliqueBotaoTema(event.target);
+    lidarCliqueBotaoTema(event.target, buscarNoticias);
 
 })

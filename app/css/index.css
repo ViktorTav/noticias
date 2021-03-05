@@ -3,6 +3,15 @@ body{
     width: 100vw; height: 100vh;
 }
 
+#mensagem{
+
+    position: absolute;
+    left: 50%; bottom: 0;
+    transform:translateX(-50%);
+    z-index: 20;
+
+}
+
 div#conteudo{
 
     position: relative;
@@ -14,20 +23,14 @@ div#conteudo{
 div#seletorDeNoticias{
 
     position: absolute;
+    top: 50%; left: 50%;
     display: flex;
     align-items: center;
-    height: max-content;
-    left: 10%;
-    width: 666px;
-    margin-right: 50px;
     justify-content: center;
-
-}
-
-div#seletorDeNoticias.center{
-
-    top: 50%; left: 50%;
+    height: max-content;
+    width: 666px;
     transform: translate(-50%,-50%);
+    justify-content: center;
 
 }
 
@@ -46,15 +49,15 @@ div#temasNoticias{
 div#noticias{
 
     position: absolute;
-    width: 500px;height: 100%;
     right: 0; top: 50%;
-    opacity: 0;
-    transform: translate(0,-50%);
-    display: flex;
+    width: 500px;height: 100%;
+    margin-right: 10px;
+    display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-right: 10px;
+    opacity: 0;
+    transform: translate(0,-50%);
 
 }
 
@@ -65,8 +68,3 @@ div#noticias ul{
 
 }
 
-.hide{
-
-    display: none !important;
-
-}
