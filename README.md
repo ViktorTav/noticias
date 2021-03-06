@@ -33,4 +33,6 @@ A parte que eu acreditava ser a mais simples e menos demorada, acabou sendo o qu
 
 * Envio de notícias pelo e-mail
 
+## Thank you!
 
+![Marcos Jeeves diz: Thank you!](https://media1.tenor.com/images/b37f90c715bc2dd1ca46c825aec889e8/tenor.gif?itemid=19943938)
